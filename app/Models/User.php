@@ -17,11 +17,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+		'nickname',
         'name',
+		'surname',
+		'avatar',
+		'phone',
+		'sex',
         'email',
+		'allowMailing',
         'password',
     ];
-
+	
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -46,6 +52,6 @@ class User extends Authenticatable
      */
     public function articles()
     {
-        return $this->belongsToMany(Article::class);
+        return $this->belongsToMany(Article::class, 'users_articles');
     }
 }

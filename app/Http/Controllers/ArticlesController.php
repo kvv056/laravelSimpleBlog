@@ -20,6 +20,7 @@ class ArticlesController extends Controller
 	public function userArticles(Request $request)
 	{
 		$user = $request->user(); 
-		dd($user->articles()->get());
+//		dd($user->test);
+		dd($user->articles()->where('articles.id', 1)->get());
 	}
 }

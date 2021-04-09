@@ -6,60 +6,104 @@
         <div class="col-md-8">
             <div class="card">
 				<div class='edit-profile'>
-        <h2 class="heading">Редактировать профиль</h2>
-        <form class='form' id='form' method='POST' enctype='multipart/form-data'>
-          <ul class="form__list">
-            <li class="form__item">
-              <label class='form__label' for="nickname">Никнейм:</label>
-              <input class='form__input' id='nickname' type="text">
-            </li>
-            <li class="form__item">
-              <label class='form__label' for="name">Имя:</label>
-              <input class='form__input' id='name' type="text">
-            </li>
-            <li class="form__item">
-              <label class='form__label' for="surname">Фамилия:</label>
-              <input class='form__input' id='surname' type="text">
-            </li>
-            <li class="form__item">
-              <label class='form__inline-label' for="avatar">Аватар:</label>
-              <input class='form__inline-input' id='avatar' type="file" value='image/jpeg,image/png'>
-            </li>
-            <li class="form__item">
-              <label class='form__label' for="phone">Телефон:</label>
-              <input class='form__input' id='phone' type="text">
-            </li>
-            <li class="form__item">
-              <div class="form__title">Пол:</div>
-              <label class='form__inline-label' for="male">Мужской</label>
-              <input class='form__inline-input' name='sex' id='male' type="radio">
-              <label class='form__inline-label' for="female">Женский</label>
-              <input class='form__inline-input' name='sex' id='female' type="radio">
-            </li>
-            <li class="form__item">
-              <label class='form__inline-label' for="showPhone">Я согласен получать email-рассылку</label>
-              <input class='form__inline-input' id='showPhone' type="checkbox">
-            </li>
-            <li class="form__item">
-              <button class='form__button' type="submit">Отправить</button>
-            </li>
-          </ul>
-        </form>
-      </div>
-<!--				
-                <div class="card-header">{{ __('Register') }}</div>
+
+				<div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype='multipart/form-data'>
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="nickname" class="col-md-4 col-form-label text-md-right">{{ __('Никнейм') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="nickname" type="text" class="form-control @error('nickname') is-invalid @enderror" name="nickname" value="{{ old('nickname') }}" required autocomplete="nickname">
+
+                                @error('nickname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+						
+						<div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Имя') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                 @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+						
+						<div class="form-group row">
+                            <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('Фамилия') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname">
+
+                                @error('surname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+						
+						<div class="form-group row">
+                            <label for="avatar" class="col-md-4 col-form-label text-md-right">{{ __('Аватар') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="avatar" type="file" value='image/jpeg,image/png' class="form-control @error('avatar') is-invalid @enderror" name="avatar" value="{{ old('avatar') }}" required>
+								
+                                @error('avatar')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+						
+						<div class="form-group row">
+                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Телефон') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+
+                                @error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+						
+						<div class="form-group row">
+                            <label for="sex" class="col-md-4 col-form-label text-md-right">{{ __('Пол') }}</label>
+
+                            <div class="col-md-6">
+                                <label class='form__inline-label' for="male">Мужской</label>
+								<input class='form__inline-input' name='sex' id='male' value="male" type="radio">
+								<label class='form__inline-label' for="female">Женский</label>
+								<input class='form__inline-input' name='sex' id='female' value="female" type="radio">
+                                @error('sex')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+						<div class="form-group row">
+                            <label for="allowMailing" class="col-md-4 col-form-label text-md-right">{{ __('Я согласен получать email-рассылку') }}</label>
+
+                            <div class="col-md-6">
+								<input class='form__inline-input' id='allowMailing' name="allowMailing" type="checkbox">
+                                @error('allowMailing')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -111,7 +155,7 @@
                             </div>
                         </div>
                     </form>
-                </div>-->
+                </div>
             </div>
         </div>
     </div>

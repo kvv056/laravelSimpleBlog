@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use Carbon\Carbon;
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -28,6 +30,16 @@ class User extends Authenticatable
         'password',
     ];
 	
+	public function getExperienceAttribute()
+	{
+		$currentTime = Carbon::now();
+//		$startTime = Carbon::parse($this->created_at);
+		$finishTime = Carbon::parse($this->created_at);
+
+		$totalDuration = $finishTime->diffForHumans($currentTime);
+		return $totalDuration;
+	}
+	
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -45,6 +57,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+//		'created_at' => 'datetime'
     ];
 	
 	/**

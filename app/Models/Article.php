@@ -26,4 +26,12 @@ class Article extends Model
     {
         return $this->belongsToMany(User::class, 'users_articles');
     }
+	
+	public function mismatch(User $user) : ?bool
+	{
+		if(isnull($this->deleted_at)){
+			return null;
+		}
+		return $this->authors()->where('users.id', $user->id)->count() != 0;
+	}
 }
